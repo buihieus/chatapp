@@ -37,7 +37,7 @@ const PersonalInfoForm = ({ userInfo }: Props) => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Heart className="size-5 text-primary" />
-          Thông tin cá nhân của bạn
+          Thông tin cá nhân
         </CardTitle>
         <CardDescription>
           Cập nhật chi tiết cá nhân và thông tin hồ sơ của bạn
