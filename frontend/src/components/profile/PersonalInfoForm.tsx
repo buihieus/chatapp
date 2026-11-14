@@ -37,7 +37,7 @@ const PersonalInfoForm = ({ userInfo }: Props) => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Heart className="size-5 text-primary" />
-          Thông tin cá nhân
+          Thông tin cá nhân của bạn
         </CardTitle>
         <CardDescription>
           Cập nhật chi tiết cá nhân và thông tin hồ sơ của bạn
@@ -56,7 +56,7 @@ const PersonalInfoForm = ({ userInfo }: Props) => {
                 id={key}
                 type={type ?? "text"}
                 value={userInfo[key] ?? ""}
-                onChange={() => {}}
+                onChange={() => { }}
                 className="glass-light border-border/30"
               />
             </div>
@@ -69,7 +69,7 @@ const PersonalInfoForm = ({ userInfo }: Props) => {
             id="bio"
             rows={3}
             value={userInfo.bio ?? ""}
-            onChange={() => {}}
+            onChange={() => { }}
             className="glass-light border-border/30 resize-none"
           />
         </div>
