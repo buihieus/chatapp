@@ -1,8 +1,16 @@
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
+import dotenv from "dotenv";
 import { socketAuthMiddleware } from "../middlewares/socketMiddleware.js";
 import { getUserConversationsForSocketIO } from "../controllers/conversationController.js";
+
+dotenv.config();
+
+export const clientUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.CLIENT_URL_PRODUCTION || process.env.CLIENT_URL
+    : process.env.CLIENT_URL_LOCAL || process.env.CLIENT_URL || "http://localhost:5173";
 
 const app = express();
 
@@ -10,7 +18,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: clientUrl,
     credentials: true,
   },
 });
