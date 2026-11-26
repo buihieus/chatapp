@@ -17,6 +17,7 @@ export const useSocketStore = create<SocketState>((set, get) => ({
 
     const socket: Socket = io(baseURL, {
       auth: { token: accessToken },
+      withCredentials: true,
       transports: ["websocket"],
     });
 

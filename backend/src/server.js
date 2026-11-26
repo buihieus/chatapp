@@ -11,7 +11,8 @@ import { protectedRoute } from "./middlewares/authMiddleware.js";
 import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
-import { app, server, clientUrl } from "./socket/index.js";
+import { app, server } from "./socket/index.js";
+import { allowedOrigins, corsOptions } from "./libs/cors.js";
 import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
@@ -19,10 +20,13 @@ dotenv.config();
 // const app = express();
 const PORT = process.env.PORT || 5001;
 
+// Trust first proxy (Render / reverse proxy) for accurate protocol/IP handling
+app.set("trust proxy", 1);
+
 // middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: clientUrl, credentials: true }));
+app.use(cors(corsOptions));
 
 // CLOUDINARY Configuration
 cloudinary.config({
@@ -49,6 +53,6 @@ app.use("/api/conversations", conversationRoute);
 connectDB().then(() => {
   server.listen(PORT, () => {
     console.log(`server bắt đầu trên cổng ${PORT}`);
-    console.log(`CORS allowed origin: ${clientUrl}`);
+    console.log(`CORS allowed origins: ${allowedOrigins.join(", ") || "(none)"}`);
   });
 });
